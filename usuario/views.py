@@ -10,4 +10,5 @@ def Registro(request):
 def MenuPrincipal(request):
     return render(request, "MenuInicio.html")
 
-
+def inicio(request):
+    return render(request, 'inicio.html')

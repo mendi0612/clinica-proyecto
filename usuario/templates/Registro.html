@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,10 +71,6 @@
 
 <body>
 
-<div class="menu">
-    <div><b>Clinica_Proyecto</b></div>
-</div>
-
 <div class="contenedor">
     <h2>Registro de Usuario</h2>
 
@@ -92,8 +89,8 @@
         <input type="password" name="password" placeholder="Contraseña" required>
 
         <input type="password" name="confirmar" placeholder="Confirmar contraseña" required>
-
-        <button type="submit">Registrarse</button>
+        <a href="/Login/"></a>
+        <button type="submit" href >Registrarse</button>
     </form>
 
      {% if mensaje %}

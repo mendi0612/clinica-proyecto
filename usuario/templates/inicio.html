@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clínica Proyecto</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            width:100%;
+            background:#2c3e50;
+            padding:15px 50px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            color:white;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .logo img{
+            width:50px;
+        }
+
+        .menu a{
+            text-decoration:none;
+            color:white;
+            margin-left:20px;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        .menu a:hover{
+            color:#1abc9c;
+        }
+
+        .btn{
+            background:#3498db;
+            padding:10px 18px;
+            border-radius:8px;
+        }
+
+        .btn:hover{
+            background:#2980b9;
+            color:white !important;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero{
+            height:90vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:50px;
+        }
+
+        .hero-contenido{
+            width:50%;
+        }
+
+        .hero-contenido h1{
+            font-size:55px;
+            color:#2c3e50;
+            margin-bottom:20px;
+        }
+
+        .hero-contenido p{
+            font-size:20px;
+            color:#555;
+            line-height:1.6;
+            margin-bottom:30px;
+        }
+
+        .hero-contenido a{
+            text-decoration:none;
+            background:#1abc9c;
+            color:white;
+            padding:15px 30px;
+            border-radius:10px;
+            font-size:18px;
+        }
+
+        .hero-contenido a:hover{
+            background:#16a085;
+        }
+
+        .hero-imagen{
+            width:50%;
+            text-align:center;
+        }
+
+        .hero-imagen img{
+            width:80%;
+        }
+
+        /* ================= TARJETAS ================= */
+
+        .servicios{
+            padding:60px;
+            text-align:center;
+        }
+
+        .servicios h2{
+            font-size:40px;
+            margin-bottom:40px;
+            color:#2c3e50;
+        }
+
+        .cards{
+            display:flex;
+            justify-content:center;
+            gap:30px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            background:white;
+            width:250px;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+        }
+
+        .card h3{
+            margin:20px 0;
+            color:#2c3e50;
+        }
+
+        .card p{
+            color:#666;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            <img src="{% static 'img/LogoSinFondo.png' %}">
+            <span>Clínica Proyecto</span>
+        </div>
+
+        <div class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Servicios</a>
+            <a href="#">Contacto</a>
+
+            <a href="/Login/" class="btn">Iniciar Sesión</a>
+
+            <a href="/Registro/" class="btn">Registrarse</a>
+        </div>
+
+    </div>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-contenido">
+
+            <h1>Sistema Inteligente para Gestión Clínica</h1>
+
+            <p>
+                Administra historias clínicas, citas médicas,
+                farmacia y facturación desde un solo lugar
+                de forma rápida y segura.
+            </p>
+
+            <a href="/registro/">Comenzar</a>
+
+        </div>
+
+        <div class="hero-imagen">
+            <img src="{% static 'img/LogoSinFondo.png' %}">
+        </div>
+
+    </section>
+
+    <!-- ================= SERVICIOS ================= -->
+
+    <section class="servicios">
+
+        <h2>Nuestros Módulos</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🏥 Historia Clínica</h3>
+                <p>Gestión completa de pacientes y diagnósticos.</p>
+            </div>
+
+            <div class="card">
+                <h3>📅 Agendamiento</h3>
+                <p>Reserva y control de citas médicas.</p>
+            </div>
+
+            <div class="card">
+                <h3>💰 Facturación</h3>
+                <p>Administración de pagos y facturas.</p>
+            </div>
+
+            <div class="card">
+                <h3>💊 Farmacia</h3>
+                <p>Control de medicamentos e inventario.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+</html>
