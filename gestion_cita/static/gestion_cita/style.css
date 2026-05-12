@@ -81,3 +81,129 @@ body{
         font-weight:bold;
         }
 
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f4f4f4;
+}
+
+/* MENU */
+
+.menu{
+    background:#eaeaea;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ccc;
+}
+
+.menu a{
+    text-decoration:none;
+    margin-left:25px;
+    color:#333;
+    font-weight:bold;
+}
+
+.menu a:hover{
+    color:#3498db;
+}
+
+/* CONTENEDOR */
+
+.contenedor{
+    background:white;
+    width:800px;
+    margin:40px auto;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    color:#222;
+    margin-bottom:25px;
+}
+
+h2{
+    margin-top:35px;
+    color:#333;
+}
+
+/* FORMULARIO */
+
+form{
+    margin-top:20px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+    color:#444;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border:1px solid #3498db;
+}
+
+/* BOTON */
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#3498db;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+/* LISTA DE CITAS */
+
+ul{
+    list-style:none;
+    padding:0;
+    margin-top:20px;
+}
+
+li{
+    background:#f9f9f9;
+    margin-bottom:10px;
+    padding:15px;
+    border-radius:8px;
+    border-left:5px solid #3498db;
+}
+
+/* ESTADOS */
+
+.disponible{
+    color:green;
+    font-weight:bold;
+}
+
+.no_disponible{
+    color:red;
+    font-weight:bold;
+}

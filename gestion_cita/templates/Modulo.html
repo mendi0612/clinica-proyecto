@@ -1,76 +1,93 @@
 {% load static %}
 
-
 <!DOCTYPE html>
-
 <html>
-    <link rel="stylesheet" href="{% static 'gestion_cita/style.css'%}">
-    <head>
-        <title>Sistema Historia Clínica</title>
-        
 
-        
+<head>
 
-    </head>
+    <title>Sistema Historia Clínica</title>
 
+    <link rel="stylesheet" href="{% static 'gestion_cita/style.css' %}">
 
-    <body>
+</head>
 
-       
-        <div class="menu">
+<body>
 
-            <div>
-                <b>Clinica_Proyecto</b>
-            </div>
+    <div class="menu">
 
-            <div>
-                <a href="#">Inicio</a>
-                <a href="#">Pacientes</a>
-                <a href="#">Historia Clinica</a>
-                <a href="#">farmacia</a>
-                <a href="#">facturacion</a>
-            </div>
-
+        <div>
+            <b>Clinica_Proyecto</b>
         </div>
 
-
-               
-        <div class="contenedor">
-
-            <h1>Gestion de Citas</h1>
-            
-            
-                <p>
-                Bienvenido al modulo de asignacion de citas {{usuario}}
-                </p>
-
-                <p>
-                Desde este modulo se pueden asignar las siguientes citas disponibles.
-         
-            </p>
-
-            {% if citas %}
-            <ul>
-                {% for cita in citas %}
-                    <li>
-                        {{cita.medico}} - {{cita.hora}} -
-                        {% if cita.estado == "Disponible" %}
-                            <span class="disponible">Disponible</span>
-                        {% else %}
-                            <span class="no_disponible">No disponible</span>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <p>No hay citas</p>
-            {% endif %}
+        <div>
+            <a href="#">Inicio</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Historia Clinica</a>
+            <a href="#">Farmacia</a>
+            <a href="#">Facturacion</a>
         </div>
-   
-          
-</div>
 
-  
-    </body>
+    </div>
 
-    </html>
+    <div class="contenedor">
+
+        <h1>Gestión de Citas</h1>
+
+        <p>
+            Bienvenido al módulo de agendamiento de citas {{usuario}}
+        </p>
+
+        <p>
+            Utiliza este módulo para agregar tus proximas citas.
+        </p>
+
+        <!-- FORMULARIO -->
+
+        <h2>Registrar Nueva Cita</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label>Nombre del Médico*</label>
+            <input type="text" name="nombre_medico" required>
+
+            <label>Horario Disponible*</label>
+            <input type="time" name="horario_disponible" required>
+
+            <label>Fecha Disponible*</label>
+            <input type="date" name="fecha_disponible" required>
+
+            <label>Sede Disponible*</label>
+            <input type="text" name="sede_disponible" required>
+
+            <label>Especialidad*</label>
+            <input type="text" name="especialidad" required>
+
+            <label>Estado</label>
+
+            <select name="estado">
+
+                <option value="Disponible">
+                    Disponible
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Guardar Cita
+            </button>
+
+        </form>
+
+        <hr>
+
+
+
+        
+
+    </div>
+
+</body>
+
+</html>

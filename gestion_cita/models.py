@@ -2,23 +2,20 @@ from django.db import models
 
 class Cita(models.Model):
 
-    paciente = models.CharField(max_length=100)
-    medico = models.CharField(max_length=100)
-    fecha = models.DateField(auto_now_add=True)
-    hora = models.TimeField(null=False, blank=False)
-    motivo = models.TextField(help_text="Escriba el motivo de la cita")
-    estado = models.CharField(max_length=50)
+    nombre_medico = models.CharField(max_length=100)
 
-    def _str_(self):
-        return f"Paciente: {self.paciente}"
+    horario_disponible = models.TimeField()
 
-class CrearCita(models.Model):
+    fecha_disponible = models.DateField()
 
-    tipo_cita = models.CharField(max_length=100)
-    medico = models.CharField(max_length=100)
-    paciente = models.CharField(max_length=100)
-    agenda = models.DateTimeField()
-    estado = models.CharField(max_length=20, default="Pendiente")
+    sede_disponible = models.CharField(max_length=100)
 
-    def _str_(self):
-        return f"Paciente: {self.tipo_cita}"
+    especialidad = models.CharField(max_length=100)
+
+    estado = models.CharField(
+        max_length=50,
+        default="Disponible"
+    )
+
+    def __str__(self):
+        return f"{self.nombre_medico} - {self.fecha_disponible}"
