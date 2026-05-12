@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicamentos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+        h1 {
+            color: #27ae60;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 10px;
+        }
+        .card {
+            border: 1px solid #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fafafa;
+            margin-bottom: 20px;
+        }
+        .alerta {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventario de Medicamentos</h1>
+
+    {% for medicamento in medicamentos %}
+    <div class="card">
+        <h3>{{ medicamento.nombre }}</h3>
+        <p>Laboratorio: {{ medicamento.laboratorio }}</p>
+        <p>Precio: ${{ medicamento.precio }}</p>
+        <p>Stock: {{ medicamento.stock }}</p>
+
+        {% if medicamento.requiere_formula %}
+            <p class="alerta">Requiere fórmula médica</p>
+        {% else %}
+            <p>No requiere fórmula médica</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</body>
+</html>
