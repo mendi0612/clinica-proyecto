@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalle Factura</title>
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* ================= VARIABLES ================= */
+
+:root{
+
+    --color-principal:#2563eb;
+    --color-secundario:#1e293b;
+    --color-acento:#14b8a6;
+
+    --color-fondo:#f1f5f9;
+    --color-blanco:#ffffff;
+
+    --color-texto:#334155;
+
+    --sombra:0px 10px 25px rgba(0,0,0,0.08);
+}
+
+
+/* ================= BODY ================= */
+
+body{
+
+    font-family:'Segoe UI';
+
+    background:var(--color-fondo);
+
+    padding:40px;
+}
+
+
+/* ================= FACTURA ================= */
+
+.factura{
+
+    width:90%;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:var(--sombra);
+}
+
+
+/* ================= TITULO ================= */
+
+h1{
+
+    color:var(--color-secundario);
+
+    margin-bottom:25px;
+
+    font-size:40px;
+}
+
+
+/* ================= INFO ================= */
+
+.info{
+
+    margin-bottom:35px;
+
+    line-height:2;
+
+    font-size:18px;
+}
+
+
+/* ================= TABLA ================= */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+
+th{
+
+    background:var(--color-principal);
+
+    color:white;
+
+    padding:16px;
+}
+
+
+td{
+
+    padding:16px;
+
+    border-bottom:1px solid #ddd;
+
+    text-align:center;
+}
+
+
+tr:hover{
+
+    background:#f8fafc;
+}
+
+
+/* ================= TOTAL ================= */
+
+.total{
+
+    margin-top:35px;
+
+    text-align:right;
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:var(--color-secundario);
+}
+
+
+/* ================= BOTON ================= */
+
+.btn{
+
+    display:inline-block;
+
+    margin-top:40px;
+
+    background:var(--color-principal);
+
+    color:white;
+
+    padding:15px 28px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+
+    background:#1d4ed8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="factura">
+
+    <h1>
+
+        🧾 {{ factura.numero_factura }}
+
+    </h1>
+
+    <div class="info">
+
+        <strong>Fecha:</strong>
+
+        {{ factura.fecha }}
+
+        <br>
+
+        <strong>Método de pago:</strong>
+
+        {{ factura.metodo_pago }}
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Producto</th>
+
+                <th>Cantidad</th>
+
+                <th>Precio</th>
+
+                <th>Subtotal</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for detalle in factura.detalles.all %}
+
+            <tr>
+
+                <td>
+
+                    {{ detalle.producto.nombre }}
+
+                </td>
+
+                <td>
+
+                    {{ detalle.cantidad }}
+
+                </td>
+
+                <td>
+
+                    $ {{ detalle.precio_unitario }}
+
+                </td>
+
+                <td>
+
+                    $ {{ detalle.subtotal }}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <div class="total">
+
+        TOTAL:
+        $ {{ factura.total }}
+
+    </div>
+
+
+    <a href="/MenuPrincipal/" class="btn">
+
+        ⬅ Volver
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

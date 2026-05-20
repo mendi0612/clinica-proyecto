@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Mis Citas</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+
+<body>
+ 
+<div class="container">
+    <a href="/gestion/"
+            class="btn grean">
+
+            volver
+
+    </a>
+
+    <h3 class="center">
+        Mis Citas
+    </h3>
+
+    <table class="striped centered">
+
+        <thead>
+
+            <tr>
+
+                <th>Doctor</th>
+                <th>Especialidad</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Motivo</th>
+                <th>Acciones</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for cita in citas %}
+
+            <tr>
+
+                <td>
+                    {{ cita.doctor.nombre }}
+                </td>
+
+                <td>
+                    {{ cita.doctor.especialidad.nombre }}
+                </td>
+
+                <td>
+                    {{ cita.fecha }}
+                </td>
+
+                <td>
+                    {{ cita.hora }}
+                </td>
+
+                <td>
+                    {{ cita.estado }}
+                </td>
+
+                <td>
+                    {{ cita.motivo }}
+                </td>
+
+                <td>
+
+                    <a href="/editar_cita/{{ cita.id }}/"
+                       class="btn blue">
+
+                        Editar
+
+                    </a>
+
+                    <a href="/eliminar_cita/{{ cita.id }}/"
+                       class="btn red">
+
+                        Cancelar Cita
+                    </a>
+
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="7">
+
+                    No tienes citas registradas
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+       
+</body>
+
+</html>

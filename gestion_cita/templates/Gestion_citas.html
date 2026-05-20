@@ -1,164 +1,75 @@
- 
- {% load static %}
-
-
+{% load static %}
 <!DOCTYPE html>
- <html>
-        <link rel="stylesheet" href="{% static 'gestion_cita/style.css'%}">
-    <head>
-        <title>Sistema Historia Clínica</title>
-<style>
+<html lang="es">
 
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            margin:0;
-            background:#f4f4f4;
-        }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Citas</title>
+    <link rel="stylesheet" href="{% static 'gestion_cita/style.css' %}">
 
-        /* MENU */
-        .menu{
-            background:#eaeaea;
-            padding:15px 40px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
+</head>
 
-        .menu a{
-            text-decoration:none;
-            margin-left:25px;
-            color:#333;
-            font-weight:bold;
-        }
+<body>
 
-        /* SECCION PRINCIPAL */
-        .principal{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:80px;
-            background:white;
-        }
+    <!-- HEADER -->
 
-        .texto{
-            width:50%;
-        }
+    <div class="header">
 
-        .texto h1{
-            font-size:45px;
-            margin-bottom:20px;
-        }
+        <h1>Gestión de Citas</h1>
 
-        .texto p{
-            color:#555;
-            line-height:1.6;
-        }
+        <div class="usuario">
+            <a href="/MenuPrincipal/">Inicio</a>
+        </div>
 
-        .botones-citas{
-            display:flex;
-            flex-direction:column;
-            gap:15px;
-            margin-top:15px;
-        }
+        <div class="usuario">
+            Bienvenido {{ nombre }}
+        </div>
 
-        .btn-cita{
-            padding:15px;
-            font-size:16px;
-            border:none;
-            border-radius:8px;
-            background-color:#3498db;
-            color:white;
-            cursor:pointer;
-            transition:0.3s;
-        }
+    </div>
 
-        .btn-cita:hover{
-            background-color:#2980b9;
-        }
+    <!-- CONTENEDOR -->
 
-        .cancelar{
-            background-color:#e74c3c;
-        }
+    <div class="contenedor">
 
-        .cancelar:hover{
-            background-color:#c0392b;
-        }
-      
+        <!-- CARD AGREGAR -->
 
-        .contenedor{
-            background:white;
-            width:700px;
-            margin:40px auto;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-        }
+        <div class="card">
 
-        h2{
-            color:#333;
-        }
+            <div class="icono">📅</div>
 
-        ul{
-            line-height:1.8;
-        }
+            <h2>Agendar Cita</h2>
 
-        </style>
-        
+            <p>
+                Agenda una nueva cita médica con el especialista que necesites.
+            </p>
 
-    </head>
+            <a href="/crear_cita/" class="btn">
+                Agendar
+            </a>
 
+        </div>
 
-    <body>
+        <!-- CARD MODIFICAR -->
 
-       
-        <div class="menu">
+        <div class="card">
 
-            <div>
-                <b>Clinica_Proyecto</b>
-            </div>
+            <div class="icono">👁️</div>
 
-            <div>
-                <a href="#">Inicio</a>
-                <a href="#">Pacientes</a>
-                <a href="#">Historia Clinica</a>
-                <a href="#">farmacia</a>
-                <a href="#">facturacion</a>
-            </div>
+            <h2>Mis Cita</h2>
+
+            <p>
+                Cambia la fecha, hora o Cancelar de tus citas médicas.
+            </p>
+
+          <a href="/mis_citas/"
+            class="btn blue">
+            Modificar
+        </a>
 
         </div>
 
 
-               
-        <div class="contenedor">
+</body>
 
-            <h2>Gestion de Citas</h2>
-
-            <p>
-            Bienvenido al modulo de gestion de citas.
-            </p>
-
-            <p>
-            Desde este modulo se pueden administrar todas las citas de los pacientes.
-            </p>
-
-            <p>
-            Seleccione alguna de las opciones para su requerimiento:
-            </p>
-
-            <div class="botones-citas">
-
-                <a href="/asignacion/" class="btn-cita" style="text-align:center; text-decoration:none;">Agendamiento de citas medicas</a>
-                <a href="/consulta/" class="btn-cita" style="text-align:center; text-decoration:none;">Consulta de citas programadas</a>
-                <a href="/modificacion/" class="btn-cita" style="text-align:center; text-decoration:none;">Modificacion de citas medicas</a>
-                <a href="/cancelacion/" class="btn-cita" style="text-align:center; text-decoration:none;">Cancelacion de citas medicas</a>
-
-    
-
-</div>
-
-        </div>
-
-
-    </body>
-
-    </html>
+</html>

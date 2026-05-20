@@ -1,33 +1,194 @@
+import json
+import random
+
+from decimal import Decimal
+
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Medicamento, Dispensacion, Ticket, Sede
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
-def home(request):
-    data = {
-        'nombre_usuario': 'Paula'
-    }
-    return render(request, 'home.html', data)
+from .models import (
+    Producto,
+    Categoria,
+    Factura,
+    DetalleFactura
+)
 
-def lista_medicamentos(request):
-    data = {
-        'medicamentos': Medicamento.objects.all()
-    }
-    return render(request, 'lista_medicamentos.html', data) 
 
-def lista_dispensaciones(request):
-    data = {
-        'dispensaciones': Dispensacion.objects.all()
-    }
-    return render(request, 'lista_dispensaciones.html', data)
+# =========================
+# FARMACIA
+# =========================
 
-def lista_tickets(request): 
-    data = {
-        'tickets': Ticket.objects.all()
-    }
-    return render(request, 'lista_tickets.html', data)
+def farmacia(request):
 
-def lista_sedes(request):
-    data = {
-        'sedes': Sede.objects.all()
+    productos = Producto.objects.filter(
+        estado='ACTIVO'
+    )
+
+    categorias = Categoria.objects.all()
+
+    contexto = {
+
+        'productos': productos,
+        'categorias': categorias
     }
-    return render(request, 'lista_sedes.html', data)
+
+    return render(
+        request,
+        'farmacia.html',
+        contexto
+    )
+
+
+# =========================
+# CARRITO
+# =========================
+
+def carrito(request):
+
+    return render(
+        request,
+        'carrito.html'
+    )
+
+
+# =========================
+# FACTURACION
+# =========================
+
+def facturacion(request):
+
+    return render(
+        request,
+        'facturacion.html'
+    )
+
+
+# =========================
+# FINALIZAR FACTURA
+# =========================
+
+@csrf_exempt
+def finalizar_factura(request):
+
+    if request.method == 'POST':
+
+        data = json.loads(
+            request.body
+        )
+
+        carrito = data.get(
+            'carrito',
+            []
+        )
+
+        subtotal = Decimal('0')
+
+
+        # =========================
+        # CREAR FACTURA
+        # =========================
+
+        numero = random.randint(
+            10000,
+            99999
+        )
+
+        factura = Factura.objects.create(
+
+            numero_factura=f"FAC-{numero}",
+
+            subtotal=0,
+
+            iva=0,
+
+            total=0,
+
+            metodo_pago='EFECTIVO'
+        )
+
+
+        # =========================
+        # RECORRER CARRITO
+        # =========================
+
+        for item in carrito:
+            producto = Producto.objects.get(
+                id=item['id']
+            )
+
+            cantidad = int(
+                item['cantidad']
+            )
+
+            precio = Decimal(
+
+                str(item['precio'])
+                .replace("$", "")
+                .replace(".", "")
+                .replace(",", "")
+
+            )
+
+            sub = precio * cantidad
+
+            subtotal += sub
+
+
+            # =========================
+            # DETALLE FACTURA
+            # =========================
+
+            DetalleFactura.objects.create(
+
+                factura=factura,
+
+                producto=producto,
+
+                cantidad=cantidad,
+
+                precio_unitario=precio,
+
+                subtotal=sub
+            )
+
+
+            # =========================
+            # DESCONTAR STOCK
+            # =========================
+
+            producto.stock -= cantidad
+
+            producto.save()
+
+
+        # =========================
+        # CALCULOS
+        # =========================
+
+        iva = subtotal * Decimal('0.19')
+
+        total = subtotal + iva
+
+
+        factura.subtotal = subtotal
+
+        factura.iva = iva
+
+        factura.total = total
+
+        factura.save()
+
+
+        return JsonResponse({
+
+            'success': True,
+
+            'factura': factura.numero_factura
+        })
+
+
+    return JsonResponse({
+
+        'success': False
+    })

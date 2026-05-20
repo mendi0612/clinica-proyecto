@@ -1,0 +1,287 @@
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* ================= VARIABLES ================= */
+
+:root{
+
+    --color-principal:#2563eb;
+    --color-secundario:#1e293b;
+    --color-acento:#14b8a6;
+
+    --color-fondo:#f1f5f9;
+    --color-blanco:#ffffff;
+
+    --color-texto:#334155;
+    --color-gris:#64748b;
+
+    --sombra:0px 10px 25px rgba(0,0,0,0.08);
+
+    --radio:18px;
+
+    --transicion:0.3s ease;
+}
+
+
+/* ================= BODY ================= */
+
+body{
+
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    background:var(--color-fondo);
+
+    color:var(--color-texto);
+}
+
+
+
+/* ================= HEADER ================= */
+
+.header{
+
+    width:100%;
+
+    background:var(--color-secundario);
+
+    padding:22px 50px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0px 5px 15px rgba(0,0,0,0.08);
+}
+
+.header h1{
+
+    color:white;
+
+    font-size:38px;
+}
+
+
+
+/* ================= CONTENEDOR ================= */
+
+.contenedor-carrito{
+
+    width:85%;
+
+    margin:auto;
+
+    margin-top:50px;
+}
+
+
+
+/* ================= ITEMS ================= */
+
+.item-carrito{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:var(--sombra);
+
+    transition:var(--transicion);
+}
+
+
+.item-carrito:hover{
+
+    transform:translateY(-5px);
+}
+
+
+.item-carrito h2{
+
+    font-size:28px;
+
+    color:var(--color-secundario);
+
+    margin-bottom:10px;
+}
+
+
+.item-carrito p{
+
+    color:var(--color-gris);
+
+    font-size:20px;
+}
+
+
+
+/* ================= CANTIDAD ================= */
+
+.cantidad{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+
+.cantidad button{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--color-principal);
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:var(--transicion);
+}
+
+
+.cantidad button:hover{
+
+    background:#1d4ed8;
+
+    transform:scale(1.05);
+}
+
+
+.cantidad span{
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+
+
+/* ================= BOTONES ================= */
+
+.botones-finales{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    margin-top:50px;
+}
+
+
+.btn-volver,
+.btn-pagar{
+
+    background:var(--color-principal);
+
+    color:white;
+
+    padding:16px 35px;
+
+    border:none;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transicion);
+
+    box-shadow:0px 8px 20px rgba(37,99,235,0.25);
+}
+
+
+.btn-volver:hover,
+.btn-pagar:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-3px);
+}
+
+
+
+/* ================= TOTAL ================= */
+
+.total{
+
+    margin-top:40px;
+
+    text-align:right;
+
+    font-size:35px;
+
+    font-weight:bold;
+
+    color:var(--color-secundario);
+}
+
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .item-carrito{
+
+        flex-direction:column;
+
+        gap:25px;
+
+        text-align:center;
+    }
+
+    .header h1{
+
+        font-size:30px;
+    }
+
+    .botones-finales{
+
+        flex-direction:column;
+    }
+
+    .btn-volver,
+    .btn-pagar{
+
+        width:100%;
+    }
+
+    .total{
+
+        text-align:center;
+    }
+}

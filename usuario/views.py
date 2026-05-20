@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from .models import Usuario
 
@@ -15,11 +14,15 @@ def usuario(request):
 
         try:
 
-            # Buscar usuario por correo
             user = Usuario.objects.get(correo=correo)
 
-            # Verificar contraseña
             if check_password(password, user.password):
+
+                # GUARDAR SESION
+                request.session['usuario_id'] = user.id
+                request.session['nombre'] = user.nombre
+                request.session['apellido'] = user.apellido
+                request.session['correo'] = user.correo
 
                 return redirect('/MenuPrincipal/')
 
@@ -63,7 +66,13 @@ def Registro(request):
     return render(request, "Registro.html")
 
 def MenuPrincipal(request):
-    return render(request, "MenuInicio.html")
+
+    nombre = request.session.get('nombre')
+
+    return render(request, 'MenuInicio.html', {
+        'nombre': nombre
+    })
 
 def inicio(request):
     return render(request, 'inicio.html')
+

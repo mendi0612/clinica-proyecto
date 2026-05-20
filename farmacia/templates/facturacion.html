@@ -1,0 +1,346 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Factura</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Segoe UI';
+
+    background:#f1f5f9;
+
+    padding:40px;
+}
+
+.factura{
+
+    width:90%;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0px 10px 25px rgba(0,0,0,0.08);
+}
+
+h1{
+
+    margin-bottom:30px;
+
+    color:#1e293b;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+}
+
+table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px;
+}
+
+table td{
+
+    padding:15px;
+
+    border-bottom:1px solid #ddd;
+}
+
+.total{
+
+    margin-top:30px;
+
+    text-align:right;
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+.botones{
+
+    margin-top:40px;
+
+    display:flex;
+
+    gap:20px;
+
+    justify-content:center;
+}
+
+.btn{
+
+    padding:15px 30px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:#2563eb;
+}
+
+.btn:hover{
+
+    opacity:0.9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="factura">
+
+    <h1>🧾 Factura</h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Producto</th>
+
+                <th>Cantidad</th>
+
+                <th>Precio</th>
+
+                <th>Subtotal</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="tablaFactura">
+
+        </tbody>
+
+    </table>
+
+    <div class="total" id="subtotal">
+
+    </div>
+
+    <div class="total" id="iva">
+
+    </div>
+
+    <div class="total" id="total">
+
+    </div>
+
+    <div class="botones">
+
+        <a href="/carrito/" class="btn">
+
+            ⬅ Volver
+
+        </a>
+
+        <button
+            class="btn"
+            onclick="finalizarCompra()"
+        >
+
+            ✅ Finalizar Compra
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let carrito = JSON.parse(
+    localStorage.getItem("carrito")
+) || [];
+
+
+const tabla = document.getElementById(
+    "tablaFactura"
+);
+
+
+let subtotal = 0;
+
+
+/* =========================
+   RECORRER CARRITO
+========================= */
+
+carrito.forEach(producto => {
+
+    const precio = parseFloat(
+        producto.precio
+    ) || 0;
+
+    const cantidad = parseInt(
+        producto.cantidad
+    ) || 0;
+
+    const sub = precio * cantidad;
+
+    subtotal += sub;
+
+
+    tabla.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${producto.nombre}
+            </td>
+
+            <td>
+                ${cantidad}
+            </td>
+
+            <td>
+                $ ${precio.toLocaleString()}
+            </td>
+
+            <td>
+                $ ${sub.toLocaleString()}
+            </td>
+
+        </tr>
+
+    `;
+});
+
+
+/* =========================
+   CALCULOS
+========================= */
+
+const iva = subtotal * 0.19;
+
+const total = subtotal + iva;
+
+
+/* =========================
+   MOSTRAR TOTALES
+========================= */
+
+document.getElementById(
+    "subtotal"
+).innerHTML = `
+
+    Subtotal:
+    $ ${subtotal.toLocaleString()}
+
+`;
+
+
+document.getElementById(
+    "iva"
+).innerHTML = `
+
+    IVA (19%):
+    $ ${iva.toLocaleString()}
+
+`;
+
+
+document.getElementById(
+    "total"
+).innerHTML = `
+
+    TOTAL:
+    $ ${total.toLocaleString()}
+
+`;
+
+
+/* =========================
+   FINALIZAR
+========================= */
+
+function finalizarCompra(){
+
+    fetch("/finalizar_factura/", {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            carrito: carrito
+        })
+
+    })
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        if(data.success){
+
+            alert(
+
+                "Factura creada correctamente: " +
+
+                data.factura
+            );
+
+            localStorage.removeItem(
+                "carrito"
+            );
+
+            window.location.href =
+            "/farmacia/";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

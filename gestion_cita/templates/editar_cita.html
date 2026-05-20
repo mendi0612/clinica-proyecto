@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Editar Cita</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <h3 class="center">
+
+        Editar Cita
+
+    </h3>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <!-- DOCTOR -->
+
+        <div class="input-field">
+
+            <input type="text"
+                   value="Dr. {{ cita.doctor.nombre }}"
+                   readonly>
+
+            <label class="active">
+
+                Doctor
+
+            </label>
+
+        </div>
+
+        <!-- FECHA -->
+
+        <div class="input-field">
+
+            <input type="date"
+                   name="fecha"
+                   value="{{ cita.fecha|date:'Y-m-d' }}"
+                   required>
+
+            <label class="active">
+
+                Fecha
+
+            </label>
+
+        </div>
+
+        <!-- HORA -->
+
+        <div class="input-field">
+
+            <select name="hora" required>
+
+                <option value="{{ cita.hora }}" selected>
+
+                    {{ cita.hora }}
+
+                </option>
+
+                <option value="08:00">08:00 AM</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+
+            </select>
+
+            <label>
+
+                Hora
+
+            </label>
+
+        </div>
+
+        <br>
+
+        <button type="submit"
+                class="btn blue">
+
+            Guardar Cambios
+
+        </button>
+
+    </form>
+
+    {% if mensaje %}
+
+        <div class="card-panel red white-text">
+
+            {{ mensaje }}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var elems = document.querySelectorAll('select');
+
+        M.FormSelect.init(elems);
+
+    });
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmacia</title>
+
+    <link rel="stylesheet" href="{% static 'farmacia.css' %}">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo-header">
+
+        <h1>💊 Farmacia</h1>
+
+    </div>
+
+    <div class="acciones-header">
+
+        <a href="/carrito/" class="btn-header">
+            🛒 Carrito
+        </a>
+
+        <a href="/MenuPrincipal/" class="btn-header">
+            ⬅ Volver
+        </a>
+
+    </div>
+
+</header>
+
+<!-- ================= CONTENEDOR ================= -->
+
+<div class="contenedor-tienda">
+
+    <!-- ================= FILTROS ================= -->
+
+    <div class="barra-filtros">
+
+        <input 
+            type="text" 
+            id="buscarProducto"
+            placeholder="Buscar medicamento..."
+        >
+
+        <select id="filtroCategoria">
+
+            <option value="todos">
+                Todas las categorías
+            </option>
+
+            {% for categoria in categorias %}
+
+                <option value="{{ categoria.nombre }}">
+                    {{ categoria.nombre }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <!-- ================= PRODUCTOS ================= -->
+
+    <div class="grid-productos">
+
+        {% for producto in productos %}
+
+        <div 
+            class="card-producto"
+            data-categoria="{{ producto.categoria.nombre }}"
+        >
+
+            <!-- IMAGEN -->
+
+            <div class="imagen-producto">
+
+                {% if producto.imagen %}
+
+                    <img src="{{ producto.imagen.url }}">
+
+                {% else %}
+
+                    <img src="{% static '234735.png' %}">
+
+                {% endif %}
+
+            </div>
+
+            <!-- CONTENIDO -->
+
+            <div class="contenido-producto">
+
+                <span class="categoria">
+
+                    {{ producto.categoria.nombre }}
+
+                </span>
+
+                <h2>
+
+                    {{ producto.nombre }}
+
+                </h2>
+
+                <p>
+
+                    {{ producto.descripcion }}
+
+                </p>
+
+                <div class="precio">
+
+                    $ {{ producto.precio_venta }}
+
+                </div>
+
+                <div class="stock">
+
+                    Stock disponible:
+                    {{ producto.stock }}
+
+                </div>
+
+                <div class="botones-producto">
+
+
+                    <button 
+                        class="agregar-carrito"
+
+                        data-id="{{ producto.id }}"
+
+                        data-nombre="{{ producto.nombre }}"
+
+                        data-precio="{{ producto.precio_venta }}"
+                    >
+
+                        🛒 Agregar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+const buscador = document.getElementById("buscarProducto");
+
+const filtroCategoria = document.getElementById("filtroCategoria");
+
+const productos = document.querySelectorAll(".card-producto");
+
+const botonesCarrito = document.querySelectorAll(
+    ".agregar-carrito"
+);
+
+/* ================= FILTRO ================= */
+
+function filtrarProductos(){
+
+    const texto = buscador.value.toLowerCase();
+
+    const categoria = filtroCategoria.value;
+
+    productos.forEach(producto => {
+
+        const nombre = producto
+        .querySelector("h2")
+        .textContent
+        .toLowerCase();
+
+        const categoriaProducto = producto.dataset.categoria;
+
+        const coincideTexto = nombre.includes(texto);
+
+        const coincideCategoria =
+
+            categoria === "todos" ||
+
+            categoriaProducto === categoria;
+
+        if(coincideTexto && coincideCategoria){
+
+            producto.style.display = "block";
+
+        }else{
+
+            producto.style.display = "none";
+        }
+
+    });
+
+}
+
+buscador.addEventListener(
+    "keyup",
+    filtrarProductos
+);
+
+filtroCategoria.addEventListener(
+    "change",
+    filtrarProductos
+);
+
+/* ================= CARRITO ================= */
+
+botonesCarrito.forEach(boton => {
+
+    boton.addEventListener("click", () => {
+
+        const producto = {
+
+            id: boton.dataset.id,
+
+            nombre: boton.dataset.nombre,
+
+            precio: boton.dataset.precio,
+
+            cantidad: 1
+        };
+
+        let carrito = JSON.parse(
+            localStorage.getItem("carrito")
+        ) || [];
+
+        const existe = carrito.find(
+            item => item.id === producto.id
+        );
+
+        if(existe){
+
+            existe.cantidad++;
+
+        }else{
+
+            carrito.push(producto);
+        }
+
+        localStorage.setItem(
+            "carrito",
+            JSON.stringify(carrito)
+        );
+
+        alert("Producto agregado al carrito");
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

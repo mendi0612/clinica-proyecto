@@ -1,209 +1,234 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
+/* ================= RESET ================= */
+
+*{
     margin:0;
-    background:#f4f4f4;
-    }
-
-    /* MENU */
-.menu{
-    background:#eaeaea;
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    }
-
-    .menu a{
-            text-decoration:none;
-            margin-left:25px;
-            color:#333;
-            font-weight:bold;
-        }
-
-        /* SECCION PRINCIPAL */
-        .principal{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:80px;
-            background:white;
-        }
-
-        .texto{
-            width:50%;
-        }
-
-        .texto h1{
-            font-size:45px;
-            margin-bottom:20px;
-        }
-
-        .texto p{
-            color:#555;
-            line-height:1.6;
-        }
-
-        .contenedor{
-            background:white;
-            width:700px;
-            margin:40px auto;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-        }
-
-        h2{
-            color:#333;
-        }
-
-        ul{
-            line-height:1.8;
-        }
-        /* ITEMS DE CITAS */
-        li{
-            background:#f1f1f1;
-            margin:10px 0;
-            padding:10px;
-        border-radius:8px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        }
-
-        /* ESTADOS DE LAS CITAS */
-        .disponible{
-            color:green;
-            font-weight:bold;
-        }
-
-        .no_disponible{
-        color:red;
-        font-weight:bold;
-        }
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    margin:0;
-    background:#f4f4f4;
-}
-
-/* MENU */
-
-.menu{
-    background:#eaeaea;
-    padding:15px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #ccc;
-}
-
-.menu a{
-    text-decoration:none;
-    margin-left:25px;
-    color:#333;
-    font-weight:bold;
-}
-
-.menu a:hover{
-    color:#3498db;
-}
-
-/* CONTENEDOR */
-
-.contenedor{
-    background:white;
-    width:800px;
-    margin:40px auto;
-    padding:40px;
-    border-radius:12px;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-}
-
-h1{
-    color:#222;
-    margin-bottom:25px;
-}
-
-h2{
-    margin-top:35px;
-    color:#333;
-}
-
-/* FORMULARIO */
-
-form{
-    margin-top:20px;
-}
-
-label{
-    display:block;
-    margin-top:15px;
-    margin-bottom:5px;
-    font-weight:bold;
-    color:#444;
-}
-
-input,
-select{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:15px;
+    padding:0;
     box-sizing:border-box;
 }
 
-input:focus,
-select:focus{
-    outline:none;
-    border:1px solid #3498db;
+/* ================= VARIABLES ================= */
+
+:root{
+
+    --color-principal:#2563eb;
+    --color-secundario:#1e293b;
+    --color-acento:#14b8a6;
+
+    --color-fondo:#f1f5f9;
+    --color-blanco:#ffffff;
+
+    --color-texto:#334155;
+    --color-gris:#64748b;
+
+    --sombra:0px 10px 25px rgba(0,0,0,0.08);
+
+    --radio:18px;
+
+    --transicion:0.3s ease;
 }
 
-/* BOTON */
+/* ================= BODY ================= */
 
-button{
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:var(--color-fondo);
+    color:var(--color-texto);
+}
+
+/* ================= HEADER ================= */
+
+.header{
+
     width:100%;
-    margin-top:25px;
-    padding:14px;
-    border:none;
-    border-radius:8px;
-    background:#3498db;
+
+    background:var(--color-secundario);
+
+    padding:22px 50px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0px 5px 15px rgba(0,0,0,0.08);
+}
+
+.header h1{
     color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+    font-size:38px;
 }
 
-button:hover{
-    background:#2980b9;
+.usuario{
+    color:white;
+    font-size:20px;
+    font-weight:600;
 }
 
-/* LISTA DE CITAS */
+/* ================= CONTENEDOR ================= */
 
-ul{
-    list-style:none;
-    padding:0;
-    margin-top:20px;
+.contenedor{
+
+    width:90%;
+
+    margin:auto;
+
+    margin-top:70px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
 }
 
-li{
-    background:#f9f9f9;
-    margin-bottom:10px;
-    padding:15px;
-    border-radius:8px;
-    border-left:5px solid #3498db;
+/* ================= CARDS ================= */
+
+.card{
+
+    width:340px;
+
+    background:var(--color-blanco);
+
+    border-radius:var(--radio);
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    box-shadow:var(--sombra);
+
+    transition:var(--transicion);
+
+    position:relative;
+
+    overflow:hidden;
 }
 
-/* ESTADOS */
+/* LINEA SUPERIOR */
 
-.disponible{
-    color:green;
-    font-weight:bold;
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:6px;
+
+    background:linear-gradient(
+        90deg,
+        var(--color-principal),
+        var(--color-acento)
+    );
 }
 
-.no_disponible{
-    color:red;
-    font-weight:bold;
+.card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:0px 15px 30px rgba(0,0,0,0.12);
+}
+
+/* ================= ICONOS ================= */
+
+.icono{
+
+    font-size:70px;
+
+    margin-bottom:25px;
+}
+
+/* ================= TITULOS ================= */
+
+.card h2{
+
+    font-size:32px;
+
+    color:var(--color-secundario);
+
+    margin-bottom:18px;
+}
+
+/* ================= TEXTO ================= */
+
+.card p{
+
+    color:var(--color-gris);
+
+    line-height:1.8;
+
+    font-size:17px;
+
+    margin-bottom:30px;
+}
+
+/* ================= BOTONES ================= */
+
+.btn{
+
+    display:inline-block;
+
+    background:var(--color-principal);
+
+    color:white;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:var(--transicion);
+
+    box-shadow:0px 8px 20px rgba(37,99,235,0.25);
+}
+
+.btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-3px);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .contenedor{
+        justify-content:center;
+    }
+}
+
+@media(max-width:768px){
+
+    .header{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        text-align:center;
+    }
+
+    .header h1{
+        font-size:30px;
+    }
+
+    .contenedor{
+        width:95%;
+    }
+
+    .card{
+        width:100%;
+    }
 }

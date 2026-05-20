@@ -1,5 +1,4 @@
 from django.db import models
-from historia_clinica.models import Paciente
 
 
 class Factura(models.Model):

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Clínica - Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+        }
+
+        /* ── NAVBAR ── */
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #1a1a2e;
+        }
+
+        .menu a {
+            text-decoration: none;
+            margin: 0 14px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .menu a:hover { color: #2563eb; }
+
+        /* ── HERO ── */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 70px 100px;
+            background: white;
+            margin: 30px 60px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .texto h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+
+        .texto p {
+            color: #666;
+            line-height: 1.7;
+            max-width: 420px;
+            font-size: 15px;
+        }
+
+        .botones { margin-top: 28px; }
+
+        .btn1 {
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 12px;
+            transition: background 0.2s;
+        }
+
+        .btn1:hover { background: #2563eb; }
+
+        .btn2 {
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .imagenes { display: flex; gap: 16px; }
+
+        .imagenes img {
+            width: 200px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        /* ── TABLA ── */
+        .seccion-tabla {
+            padding: 20px 60px 60px;
+        }
+
+        .seccion-tabla h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #1a1a2e;
+        }
+
+        .tabla-wrapper {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        thead th {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.15s;
+        }
+
+        tbody tr:last-child { border-bottom: none; }
+
+        tbody tr:hover { background: #f8fafc; }
+
+        tbody td {
+            padding: 14px 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Badges de estado */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-activo {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .badge-inactivo {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Botón ver historia */
+        .btn-ver {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-ver:hover { background: #dbeafe; }
+
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <div class="logo">Clínica Proyecto</div>
+        <div>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Historia Clínica</a>
+            <a href="#">Farmacia</a>
+            <a href="#">Facturación</a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="texto">
+            <h1>Sistema de Historia Clínica</h1>
+            <p>Plataforma sencilla para registrar y consultar la historia clínica de los pacientes. Permite almacenar tratamientos y observaciones clínicas del equipo médico.</p>
+            <div class="botones">
+                <a class="btn1" href="#">Consultar Historia Clínica</a>
+                <a class="btn2" href="#">Más información</a>
+            </div>
+        </div>
+        <div class="imagenes">
+            <img src="https://img.freepik.com/vector-premium/historia-clinica-diagnostico-tarjeta-paciente_176411-1406.jpg">
+            <img src="https://media.istockphoto.com/id/1165333893/es/vector/documento-m%C3%A9dico.jpg?s=612x612&w=0&k=20&c=-kef14WE1CG0760Vn2NlYGjs4cIeKWutQ6yeQE9RRX0=">
+        </div>
+    </div>
+
+    <div class="seccion-tabla">
+        <h2>Listado de Pacientes</h2>
+
+        <div class="tabla-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Historia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in pacientes %}
+                    <tr>
+                        <td>{{ p.nombre }}</td>
+                        <td>{{ p.documento }}</td>
+                        <td>{{ p.telefono|default:"—" }}</td>
+                        <td>
+                            {% if p.estado == "Activo" %}
+                                <span class="badge badge-activo">Activo</span>
+                            {% else %}
+                                <span class="badge badge-inactivo">Inactivo</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn-ver" href="{% url 'historia_clinica' p.id %}">Ver historia</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align:center; color:#999; padding:30px;">
+                            No hay pacientes registrados aún.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

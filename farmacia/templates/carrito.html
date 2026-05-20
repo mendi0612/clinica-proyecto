@@ -1,0 +1,235 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrito</title>
+
+      <link rel="stylesheet" href="{% static 'carrito.css' %}">
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+        <h1>🛒 Carrito de Compras</h1>
+
+    </header>
+
+
+
+    <!-- =========================
+         CONTENEDOR
+    ========================== -->
+
+    <div class="contenedor-carrito">
+
+
+        <!-- LISTA -->
+
+        <div id="listaCarrito">
+
+        </div>
+
+
+
+        <!-- TOTAL -->
+
+        <div class="total" id="totalCarrito">
+
+            Total: $0
+
+        </div>
+
+
+
+        <!-- BOTONES -->
+
+        <div class="botones-finales">
+
+            <a href="/farmacia/" class="btn-volver">
+
+                ⬅ Volver
+
+            </a>
+
+            
+
+
+            <a href="/facturacion/" class="btn-pagar">
+
+                💳 Pagar
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+
+
+<script>
+
+    let carrito = JSON.parse(
+        localStorage.getItem("carrito")
+    ) || [];
+
+
+    const lista = document.getElementById(
+        "listaCarrito"
+    );
+
+
+    const totalCarrito = document.getElementById(
+        "totalCarrito"
+    );
+
+
+
+    function renderCarrito(){
+
+        lista.innerHTML = "";
+
+        let total = 0;
+
+
+        carrito.forEach((producto, index) => {
+
+            const precio = parseFloat(producto.precio);
+
+            const subtotal = precio * producto.cantidad;
+
+            total += subtotal;
+
+
+            lista.innerHTML += `
+
+                <div class="item-carrito">
+
+                    <div>
+
+                        <h2>
+
+                            ${producto.nombre}
+
+                        </h2>
+
+                        <p>
+
+                            Precio:
+                            $ ${precio.toLocaleString()}
+
+                        </p>
+
+                        <p>
+
+                            Subtotal:
+                            $ ${subtotal.toLocaleString()}
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="cantidad">
+
+                        <button onclick="disminuir(${index})">
+
+                            -
+
+                        </button>
+
+
+                        <span>
+
+                            ${producto.cantidad}
+
+                        </span>
+
+
+                        <button onclick="aumentar(${index})">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+        });
+
+
+        totalCarrito.innerHTML =
+
+            "Total: $" +
+
+            total.toLocaleString();
+
+    }
+
+
+
+    function aumentar(index){
+
+        carrito[index].cantidad++;
+
+        guardar();
+    }
+
+
+
+    function disminuir(index){
+
+        if(carrito[index].cantidad > 1){
+
+            carrito[index].cantidad--;
+
+        }else{
+
+            carrito.splice(index, 1);
+        }
+
+        guardar();
+    }
+
+
+
+    function guardar(){
+
+        localStorage.setItem(
+
+            "carrito",
+
+            JSON.stringify(carrito)
+
+        );
+
+        renderCarrito();
+    }
+
+
+
+    renderCarrito();
+
+</script>
+
+</body>
+
+</html>
